@@ -35,5 +35,3 @@ https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/ba
 https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/battery_judge.tar.gz
 https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/SHA256SUMS
 ```
-
-Set `BATTERY_WORK_ASSET_URL` and `BATTERY_JUDGE_ASSET_URL` to these URLs when building/running the harness outside the local asset server.
