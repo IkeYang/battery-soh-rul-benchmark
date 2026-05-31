@@ -1,0 +1,44 @@
+{
+  "valid": true,
+  "score": 9.78041991750218,
+  "pass_rate": 0.0978041991750218,
+  "total_score": 9.78041991750218,
+  "summary": "score=9.780, raw_quality=0.5806, soh_mae=0.00929, rul_mae=77.77, anomaly_macro_f1=0.580",
+  "metrics": {
+    "soh_mae": 0.009292509356272993,
+    "soh_knee_mae": 0.013297908927098609,
+    "rul_mae": 77.765248317971,
+    "early_rul_mae": 89.45040274929293,
+    "eol_mae": 74.12180358650444,
+    "knee_cycle_mae": 40.37619047619047,
+    "anomaly_macro_f1": 0.5804989738004195,
+    "anomaly_binary_f1": 0.757640153262654,
+    "anomaly_type_accuracy_on_anomaly": 0.462491677147296,
+    "severity_rmse_on_anomaly": 0.37189843394483757,
+    "raw_quality": 0.5805711178213633,
+    "soh_score": 0.6122395589863394,
+    "rul_score": 0.6027242216486408,
+    "eol_score": 0.53919300275525,
+    "knee_score": 0.6537615925773554,
+    "anomaly_f1_score": 0.6602125045584251,
+    "anomaly_type_score": 0.462491677147296,
+    "severity_score": 0.18443698343868448
+  },
+  "details": [
+    {
+      "name": "soh",
+      "status": "PASSED",
+      "message": "MAE 0.00929, knee MAE 0.01330"
+    },
+    {
+      "name": "rul",
+      "status": "PASSED",
+      "message": "MAE 77.77, early MAE 89.45"
+    },
+    {
+      "name": "anomaly",
+      "status": "PASSED",
+      "message": "macro F1 0.580, type accuracy 0.462"
+    }
+  ]
+}

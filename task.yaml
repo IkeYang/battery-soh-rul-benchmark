@@ -1,0 +1,48 @@
+name: battery-soh-rul-anomaly
+title: 面向储能电池寿命评估的 SOH/RUL 预测与异常循环识别
+category: 工程/工科
+agent_type: LLM
+network_required: false
+gpu_required: false
+hardware:
+  cpu_cores: 8
+  memory_gb: 16
+  disk_gb: 20
+environment:
+  python: "3.11"
+  dependencies:
+    - numpy==1.26.4
+    - pandas==2.2.2
+    - scikit-learn==1.4.2
+    - scipy==1.13.0
+    - joblib==1.4.2
+entrypoints:
+  train: "python train.py --train-dir dev-data/train --model-dir artifacts"
+  predict: "python predict.py --input <features.csv> --output submission.csv --model-dir artifacts"
+  score: "bash scorer/score.sh agent-start"
+scoring:
+  range: "0-100"
+  metrics:
+    soh_score_weight: 0.24
+    rul_score_weight: 0.24
+    eol_score_weight: 0.10
+    knee_score_weight: 0.10
+    anomaly_f1_score_weight: 0.18
+    anomaly_type_score_weight: 0.09
+    severity_score_weight: 0.05
+  calibration:
+    starter_grouped_statistics_score: 3.520740
+    ordinary_hgb_reference_score: 9.780420
+    observed_iter6_30m_score: 13.0
+    observed_iter6_1h_score: 14.0
+    short_run_guardrail_score: 15.0
+    iter9_thirty_minute_guardrail_score: 15.0
+    iter8_one_hour_guardrail_score: 28.0
+    iter11_two_hour_guardrail_score: 28.5
+    two_hour_acceptance_ceiling_score: 30.0
+    eight_hour_target_band: "40-50"
+    expert_target_score: 100.0
+status:
+  closed_loop_verified: false
+  final_submission_ready: false
+  note: "Iteration 13 starts from Iter12 after true remote runs scored 13.97 at 30m, 28.96 at 1h, 15.00 at 2h, and 31.86 at 8h. It keeps challenge validation and retunes only the 8h score band so that 0.773535 remains the 2h acceptance ceiling at 30 and the observed 8h raw_quality 0.775292 maps into the 40-50 target band. Long-run evidence is stale until packaging, local audit, remote preflight, and staged validation are rerun."

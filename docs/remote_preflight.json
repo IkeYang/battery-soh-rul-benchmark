@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "public_summary": "Remote Linux VM preflight passed with configured SE-Bench agent credentials and SeedEdge live-auth. Secret values, local credential paths, and shell command templates are intentionally omitted from the public repository.",
+  "checks": {
+    "linux_vm": {
+      "ok": true,
+      "message": "Linux remote validation environment was reachable."
+    },
+    "agent_credentials": {
+      "ok": true,
+      "message": "Agent API credentials were configured in the VM environment; no secret values are published."
+    },
+    "seededge_live_auth": {
+      "ok": true,
+      "message": "Authenticated probe succeeded."
+    },
+    "china_mirrors": {
+      "ok": true,
+      "message": "Validation commands used PyPI/Node mirrors suitable for mainland China network conditions."
+    }
+  }
+}

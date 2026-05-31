@@ -1,0 +1,43 @@
+{
+  "task_id": "battery_soh_rul_anomaly",
+  "name": "Battery SOH RUL Anomaly",
+  "language": "python",
+  "base_image": "sebench.base.python",
+  "platform": "linux/amd64",
+  "status": "draft",
+  "source": "engineering battery-health derivative task",
+  "cwd": "/home/workspace/battery-soh-rul-benchmark/agent-start",
+  "submit_paths": [
+    "train.py",
+    "predict.py",
+    "src/",
+    "requirements.txt"
+  ],
+  "submit_exclude": [
+    "dev-data/",
+    "artifacts/",
+    "submission.csv",
+    "__pycache__/"
+  ],
+  "work": {
+    "setup_cmds": [
+      "mkdir -p /home/workspace && cd /home/workspace && curl -fsSL ${BATTERY_WORK_ASSET_URL:-http://172.17.0.1:8000/battery_soh_rul/battery_work.tar.gz} | tar -xz",
+      "cd /home/workspace/battery-soh-rul-benchmark/agent-start && python -m pip install -i ${SEBENCH_PYPI_INDEX_URL:-https://pypi.tuna.tsinghua.edu.cn/simple} -r requirements.txt",
+      "cd /home/workspace/battery-soh-rul-benchmark/agent-start && rm -rf .git artifacts submission.csv __pycache__ src/__pycache__ && git init && git config user.email 'sebench@local' && git config user.name 'sebench' && git add -A && git commit -m 'init'"
+    ],
+    "specs_dir": null,
+    "agent_query": "## Role\n\nYou are an expert Python engineer working on lithium-ion battery health analytics for an energy-storage validation lab.\n\n## Task\n\nImprove the code in this repository to predict cycle-level state of health, remaining useful life, and anomalous-cycle behavior for hidden battery cells. Visible training data is under `dev-data/train/`. `dev-data/dev_features.csv` plus `dev-data/dev_labels.csv` are provided for local validation only.\n\nYou may modify `train.py`, `predict.py`, `src/`, and `requirements.txt`. The final scorer will retrain your code from a clean state and evaluate `submission.csv` on hidden feature rows.\n\n## Local Validation Workflow\n\nSubmit a working baseline early with `sebench-submit`, then iterate. Do not spend the first pass on a large rewrite without a scored checkpoint; the best score over all submissions is what counts. Keep a known-good fast version submitted before trying heavier models.\n\nUse `python local_validate.py` for fast visible-dev feedback before submitting. It trains on `dev-data/train`, predicts `dev-data/dev_features.csv`, and prints JSON `local_score`, `raw_quality`, `stress_local_score`, `stress_raw_quality`, `regime_stress_local_score`, `regime_stress_raw_quality`, `robust_raw_quality`, `visible_to_stress_drop`, `visible_to_regime_stress_drop`, and metrics including SOH MAE, RUL MAE, EOL MAE, knee-cycle MAE, anomaly macro F1, binary F1, anomaly type accuracy, and severity RMSE. For quick iterations, run for example:\n\n```bash\npython local_validate.py --sample-train-cells 120 --sample-dev-cells 40\n```\n\nThe `stress_*` values use a deterministic eval-like sensor/protocol perturbation of visible dev features while keeping labels fixed. The `regime_stress_*` values additionally perturb lifetime/EOL regimes and anomaly mix using only visible labels. They are not hidden labels, but they help catch brittle visible-dev solutions. Use sampled runs to iterate quickly, then run full visible validation without sampling before final submission. Treat all local scores as relative feedback, not as the hidden score itself; compare variants on the same sampled/full split and prefer changes that improve `robust_raw_quality`, keep both stress drops small, and avoid collapsing any single metric.\n\nHidden cells may include lifetime-regime and capacity-calibration shifts, so avoid relying only on observed capacity ratio or visible-dev EOL patterns. Strong solutions usually combine capacity-drift augmentation, cell-level EOL calibration, cycle-level SOH/RUL models, anomaly-specific local-window features, conservative threshold tuning, and staged CPU-friendly ensembles rather than only a single global regressor. Be careful with very large forests or many full-data ensembles: training-timeout submissions score zero.\n\n## Required Output\n\nPredictions must contain exactly `cell_id, cycle_index, predicted_soh, predicted_rul_cycles, predicted_anomaly_type, predicted_anomaly_severity`, matching the input feature rows. `predicted_anomaly_type` must be one of `normal`, `capacity_drop`, `resistance_spike`, `thermal_event`, `sensor_drift`, `recovery_relaxation`.\n\n## Scoring Direction\n\nHigher score is better. The hidden scorer rewards SOH accuracy, early-life and knee-region RUL accuracy, EOL and knee-cycle calibration, anomalous-cycle detection, anomaly type classification, and severity ranking.\n\n## Rules\n\n- Do not use external network data.\n- Do not assume access to hidden labels or scorer internals.\n- Keep the command-line interfaces of `train.py` and `predict.py` working.\n- Use CPU-friendly methods; GPU dependencies are unnecessary.\n"
+  },
+  "judge": {
+    "setup_cmds": [
+      "mkdir -p /home/workspace && cd /home/workspace && curl -fsSL ${BATTERY_JUDGE_ASSET_URL:-http://172.17.0.1:8000/battery_soh_rul/battery_judge.tar.gz} | tar -xz",
+      "cd /home/workspace/battery-soh-rul-benchmark/agent-start && python -m pip install -i ${SEBENCH_PYPI_INDEX_URL:-https://pypi.tuna.tsinghua.edu.cn/simple} -r requirements.txt"
+    ],
+    "eval_cmd": "cd /home/workspace/battery-soh-rul-benchmark && bash scorer/score.sh agent-start",
+    "eval_timeout": 1800,
+    "parser": "score_sum",
+    "score_direction": "maximize",
+    "selection": "valid_then_score"
+  },
+  "internet": false
+}

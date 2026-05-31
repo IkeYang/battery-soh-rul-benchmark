@@ -1,0 +1,56 @@
+>>>> Start Structured Result
+{
+  "valid": true,
+  "score": 3.5207398005435646,
+  "pass_rate": 0.035207398005435646,
+  "total_score": 3.5207398005435646,
+  "summary": "score=3.521, raw_quality=0.3067, soh_mae=0.01558, rul_mae=157.99, anomaly_macro_f1=0.158",
+  "metrics": {
+    "soh_mae": 0.015584360907212182,
+    "soh_knee_mae": 0.04055989923791863,
+    "rul_mae": 157.98945686857547,
+    "early_rul_mae": 184.2268162049074,
+    "eol_mae": 150.89387068857874,
+    "knee_cycle_mae": 76.27619047619048,
+    "anomaly_macro_f1": 0.15849329961675815,
+    "anomaly_binary_f1": 0.4754798988502745,
+    "anomaly_type_accuracy_on_anomaly": 0.0,
+    "severity_rmse_on_anomaly": 0.5795836488909174,
+    "raw_quality": 0.3067466328195683,
+    "soh_score": 0.3764913125426584,
+    "rul_score": 0.3556493848354011,
+    "eol_score": 0.2843785737267085,
+    "knee_score": 0.44802454139389614,
+    "anomaly_f1_score": 0.3011372692718405,
+    "anomaly_type_score": 0.0,
+    "severity_score": 0.07175690935684502
+  },
+  "details": [
+    {
+      "name": "soh",
+      "status": "PASSED",
+      "message": "MAE 0.01558, knee MAE 0.04056"
+    },
+    {
+      "name": "rul",
+      "status": "PASSED",
+      "message": "MAE 157.99, early MAE 184.23"
+    },
+    {
+      "name": "anomaly",
+      "status": "PASSED",
+      "message": "macro F1 0.158, type accuracy 0.000"
+    },
+    {
+      "name": "train_tail",
+      "status": "INFO",
+      "message": "trained battery SOH/RUL model on 486003 rows\n"
+    },
+    {
+      "name": "predict_tail",
+      "status": "INFO",
+      "message": "wrote 289148 predictions to /tmp/battery_eval_13eki9md/agent-start/submission.csv\n"
+    }
+  ]
+}
+>>>>> End Structured Result

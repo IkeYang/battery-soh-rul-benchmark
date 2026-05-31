@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+artifacts/
+submission.csv
+agent-start/artifacts/
+agent-start/submission.csv
+
+# Large benchmark assets live in GitHub Releases
+agent-start/dev-data/
+scorer/eval-data/
+raw-data/
+*.tar.gz
+*.zip
+
+# Large benchmark assets live in GitHub Releases
+agent-start/dev-data/
+!agent-start/dev-data/sample_submission.csv
+scorer/eval-data/
+!scorer/eval-data/baseline_metrics.json
+raw-data/
+*.tar.gz
+*.zip

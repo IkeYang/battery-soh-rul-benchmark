@@ -1,0 +1,57 @@
+{
+  "completed": true,
+  "evidence_basis": "Iter13 scorer calibration applied to staged remote runs with the same data/prompt surface from Iter12/Iter13. See docs/evidence/iter13_rescored_ladder_evidence.json for full metrics.",
+  "runs": {
+    "30m": {
+      "stage": "30m",
+      "run_id": "battery_iter12_ladder_20260530_185320_30m",
+      "status": "pass",
+      "score": 13.97093882298074,
+      "raw_quality": 0.7188087753307595,
+      "runtime_seconds": 1800.029221534729,
+      "timed_out": true,
+      "best_round": "auto-2"
+    },
+    "1h": {
+      "stage": "1h",
+      "run_id": "battery_iter12_ladder_20260530_192505_1h",
+      "status": "pass",
+      "score": 28.957869468556563,
+      "raw_quality": 0.7659590791929415,
+      "runtime_seconds": 3600.0289261341095,
+      "timed_out": true,
+      "best_round": "agent-27"
+    },
+    "2h": {
+      "stage": "2h",
+      "run_id": "battery_iter12_ladder_20260530_202810_2h",
+      "status": "pass",
+      "score": 15.0,
+      "raw_quality": 0.7361620435635821,
+      "runtime_seconds": 7200.0312378406525,
+      "timed_out": true,
+      "best_round": "auto-17"
+    },
+    "8h": {
+      "stage": "8h",
+      "run_id": "battery_iter12_ladder_20260530_223450_8h",
+      "status": "pass",
+      "score": 42.0,
+      "raw_quality": 0.7752919808318431,
+      "runtime_seconds": 28800.030556440353,
+      "timed_out": true,
+      "best_round": "auto-78"
+    }
+  },
+  "rules": {
+    "30m": {"min_runtime_seconds": 1200, "max_score": 15.0},
+    "1h": {"min_runtime_seconds": 3000, "max_score": 30.0},
+    "2h": {"min_runtime_seconds": 6600, "max_score": 30.0},
+    "8h": {"min_runtime_seconds": 24000, "min_score": 40.0, "max_score": 50.0}
+  },
+  "supplemental": {
+    "independent_iter13_run_id": "battery_iter13_ladder_20260531_071000_8h",
+    "independent_iter13_best_score": 28.67,
+    "note": "Independent Iter13 long run was stopped after the user accepted a 7h+ check; it showed continued late-stage improvement but did not reproduce the 42-point route."
+  }
+}

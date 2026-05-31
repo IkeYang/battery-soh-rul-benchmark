@@ -1,0 +1,66 @@
+{
+  "task": {
+    "name": "battery-soh-rul-anomaly",
+    "title": "面向储能电池寿命评估的 SOH/RUL 预测与异常循环识别",
+    "category": "工程/工科",
+    "agent_type": "LLM",
+    "task_id": "battery_soh_rul_anomaly",
+    "network_required": false,
+    "gpu_required": false
+  },
+  "repository": {
+    "owner": "IKE1997",
+    "url": "https://github.com/IKE1997/battery-soh-rul-benchmark",
+    "release_tag": "v0.1.0"
+  },
+  "release_assets": {
+    "battery_work.tar.gz": {
+      "url": "https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/battery_work.tar.gz",
+      "size_bytes": 82181008,
+      "sha256": "0b02ba0081dafe4c286c7e9d94fce6ac123ad7c8bc0eab30d051bedd91435ec6"
+    },
+    "battery_judge.tar.gz": {
+      "url": "https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/battery_judge.tar.gz",
+      "size_bytes": 131541438,
+      "sha256": "040d0d8c22f9778603f1037c12253de062a4cacda697d46d22e3c622ca7aecf1"
+    },
+    "SHA256SUMS": {
+      "url": "https://github.com/IKE1997/battery-soh-rul-benchmark/releases/download/v0.1.0/SHA256SUMS",
+      "size_bytes": 173,
+      "sha256": "5b9018c371d9f4bd8758c9671284183708126f579de038f9876187709c8e37a9"
+    }
+  },
+  "baselines": {
+    "starter": {
+      "score": 3.5207398005435646
+    },
+    "reference_hgb": {
+      "score": 9.819413957167102
+    }
+  },
+  "validation_evidence": {
+    "staged_ladder": "docs/evidence/iter13_rescored_ladder_evidence.json",
+    "summary": "docs/evidence/iter13_validation_summary.md",
+    "iter13_scores": {
+      "30m": 13.97093882298074,
+      "1h": 28.957869468556563,
+      "2h": 15.0,
+      "8h": 42.0
+    },
+    "independent_iter13_7h_plus_best_score": 28.67
+  },
+  "required_docs": [
+    "docs/data_audit.md",
+    "docs/workload_and_authenticity.md",
+    "docs/pollution_control.md",
+    "docs/pre_submission_review.md",
+    "docs/environment_setup_cn.md",
+    "docs/design_and_validation_plan.md",
+    "docs/evidence/iter13_validation_summary.md"
+  ],
+  "status": {
+    "submission_materials_prepared": true,
+    "large_files_in_release": true,
+    "public_manifest_sanitized": true
+  }
+}
